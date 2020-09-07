@@ -1,0 +1,10 @@
+
+<% if account_signed_in? %>
+  <p class="h4">API KEYS</p>
+  <% @apis.each do |api| %>
+    <% if api.account_id == current_account.id %>
+
+      <p class="h5"><%= link_to api.value, api_path(api) %></p>
+    <% end %>
+  <% end %>
+<% end %>
