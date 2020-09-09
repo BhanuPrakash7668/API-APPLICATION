@@ -48,7 +48,7 @@ end
 #synonyms
 Synonym.destroy_all
 
-list1=[["Modalities", "methods, procedures, processes, approaches"],
+list1 = [["Modalities", "methods, procedures, processes, approaches"],
 ["Cognizant", "Aware, conscious, apprised, informed, observant"],
 ["Contours", "Outline, shape, form, blueprint"],
 ["Predicament", "Circumstances, crisis, deadlock, dilemma"],
@@ -71,4 +71,33 @@ list1=[["Modalities", "methods, procedures, processes, approaches"],
 ["Denunciation", "Indictment, accusation, censure, disapproval"] ]
 list1.each do |word, synonym|
   Synonym.create(word: word, synonym: synonym)
+end
+
+
+
+#antonyms
+Antonym.destroy_all
+list2 = [["Modalities", "Chaos, anarchy, differences"],
+["Cognizant", "Ignorant, indifferent, senseless"],
+["Contours", "Similarity, uniformity"],
+[" Predicament", "Advantage, Benefit, Agreement, Blessing"],
+["Unanimously", "Differently, divergently, oppositely"],
+["Precious", "Cheap, common, impaired, deficient"],
+["Unravelled", "Entangled, questioned, wondered, joined"],
+["Mooted","closed, finished"],
+["Voluntary", "Compulsory, mandatory, necessary"],
+["Subsume", "exclude"],
+["Discarded", "Cherished, worthwhile, kept"],
+["Penance", "happiness, joy, reward"],
+["Hooliganism", "Continuation, peace, assistance, beginning"],
+["Fading", "emerging, developing, reviving"],
+["Anticipate", "Doubt, be surprised, confirm"],
+["Presume", "Calculate, doubt, measure"],
+["Disruptive", "calming, disciplined, soothing"],
+["Precipitate", "Deliberate, gradual, leisurely"],
+["Consensus", "Denial, refusal, dissension"],
+["Condemnation", "compliment, acquittal, absolution"],
+["Denunciation", "Appreciation, exculpation, exoneration"]]
+list2.each do |word, antonym|
+  Antonym.create(word: word, antonym: antonym)
 end
