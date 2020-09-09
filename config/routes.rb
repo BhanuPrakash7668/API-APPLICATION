@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: "public#homepage"
   get '/definitions' =>'public#defs'
+  get '/synonyms' =>'public#syns'
   #  get '/definitions' =>'public#defs'
   devise_for :accounts
   resources :apis

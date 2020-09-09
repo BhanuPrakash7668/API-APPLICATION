@@ -11,6 +11,11 @@ before_action :authenticate,  except: [:homepage]
     @definitions = Definition.all
     render json: @definitions.to_json(:except => [:created_at, :updated_at, :token, :id])
   end
+
+  def syns
+    @sysnonyms=Synonym.all
+    render json: @sysnonyms.to_json(:except => [:created_at, :updated_at, :id])
+  end
   #def cors_set_access_control_headers
   #      headers['Access-Control-Allow-Origin'] = '*'
   #      headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, PATCH, OPTIONS'

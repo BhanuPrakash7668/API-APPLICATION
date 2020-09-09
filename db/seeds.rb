@@ -7,6 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 #@apis=Api.all
 #@apis.each do |api|
+
+#definitions
 Definition.destroy_all
 list = [["evident", "clearly revealed to the mind or the senses or judgment"],
  ["practice", "a customary way of operation or behavior"],
@@ -40,4 +42,33 @@ list = [["evident", "clearly revealed to the mind or the senses or judgment"],
 ["Cumbersome", "Heavy or large & therefore difficult to carry or use"]]
 list.each do |word, definition|
   Definition.create(word: word, definition: definition, token: "a")
+end
+
+
+#synonyms
+Synonym.destroy_all
+
+list1=[["Modalities", "methods, procedures, processes, approaches"],
+["Cognizant", "Aware, conscious, apprised, informed, observant"],
+["Contours", "Outline, shape, form, blueprint"],
+["Predicament", "Circumstances, crisis, deadlock, dilemma"],
+["Unanimously", "Collectively, commonly, consistently"],
+["Precious", "Adored, cherished, beloved, dear"],
+["Unravelled", "Deciphered, undid, resolved, solved"],
+["Mooted", "broached, discussed, introduced"],
+["Voluntary", "Discretionary, optional, elective"],
+["Subsume", "include, classify, contain, involve"],
+["Discarded", "Rejected, damaged, abandoned, relinquished"],
+["Penance", "Atonement, Expiation, Reparation"],
+["Hooliganism", "Rowdiness, disorganization, disruption"],
+["Fading", "evanescent, dying. Paling, declining"],
+["Anticipate", "Expect, foresee, predict, prophesy"],
+["Presume", "Surmise, guess, believe, assume"],
+["Disruptive", "disturbing, rowdy, troublesome, unruly"],
+["Precipitate", "Hasty, rash, rushed"],
+["Consensus", "Harmony, accord, concord, unison"],
+["Condemnation", "damnation, reproach"],
+["Denunciation", "Indictment, accusation, censure, disapproval"] ]
+list1.each do |word, synonym|
+  Synonym.create(word: word, synonym: synonym)
 end
