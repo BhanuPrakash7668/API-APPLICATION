@@ -1,3 +1,5 @@
+
+
 class PublicController < ApplicationController
 before_action :authenticate,  except: [:homepage]
   def homepage
@@ -20,6 +22,11 @@ before_action :authenticate,  except: [:homepage]
   def ants
     @antonyms=Antonym.all
     render json: @antonyms.to_json(:except => [:created_at, :updated_at, :id])
+  end
+
+  def exms
+      @examples = Example.all
+      render json: @examples.to_json(:except => [:created_at, :updated_at, :id])
   end
   #def cors_set_access_control_headers
   #      headers['Access-Control-Allow-Origin'] = '*'

@@ -1,4 +1,5 @@
 require 'securerandom'
+
 class Definition < ApplicationRecord
    has_many :apis
 #response.set_header('Authorization', 'Token 3nl7QISLkQrZgzjTp1vBOwtt')

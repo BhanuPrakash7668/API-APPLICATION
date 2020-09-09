@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/definitions' =>'public#defs'
   get '/synonyms' =>'public#syns'
   get '/antonyms' =>'public#ants'
+  get '/examples' =>'public#exms'
   #  get '/definitions' =>'public#defs'
   devise_for :accounts
   resources :apis

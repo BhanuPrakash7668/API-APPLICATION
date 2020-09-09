@@ -6,10 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 #@apis=Api.all
-#@apis.each do |api|
+#@apis.each do |api
+
 
 #definitions
 Definition.destroy_all
+
+#Definition.reload.id
+
 list = [["evident", "clearly revealed to the mind or the senses or judgment"],
  ["practice", "a customary way of operation or behavior"],
  ["intend", "have in mind as a purpose"],
@@ -100,4 +104,31 @@ list2 = [["Modalities", "Chaos, anarchy, differences"],
 ["Denunciation", "Appreciation, exculpation, exoneration"]]
 list2.each do |word, antonym|
   Antonym.create(word: word, antonym: antonym)
+end
+
+#Examples
+Example.destroy_all
+list3 = [["Modalities", "The bureaucrats are the persons who work out the modalities after an agreement is signed by countries on an international forum."],
+["Cognizant", "She is cognizant of her responsibilities as the sales head of the organisation"],
+["Contours", "She traced the contours of his face with her finger."],
+["Predicament", "The century-old club’s financial predicament is not a sudden one as the signs of the same were evident even a decade ago."],
+["Unanimously", "The standing committee has decided to pass the bill unanimously after a marathon round of discussion."],
+["Precious", "The exhibition at the gallery has many precious works of art on display."],
+["Unravelled", "The police are attempting to unravel the cause of his death."],
+["Mooted","A cheaper option to upgrade the railway link between Kuala Lumpur and Singapore has been mooted to the Malaysian government."],
+["Voluntary", "he team made a voluntary contribution out of their own pockets to help the victims of the devastating earthquake in the country."],
+["Subsume", "Most of these phenomena can be subsumed into two broad categories mainly."],
+["Discarded", "All his theories regarding black hole have been discarded by the scientists all over the world."],
+["Penance", "He had done public penance for those hasty words."],
+["Hooliganism", "party cadres resorted to hooliganism when their demands were not met in the meeting by the government."],
+["Fading","The fame of the city was fading at that time as the hub of international"],
+["Anticipate","She anticipated scorn on her return to the theatre after so many years in the mainstream movies."],
+["Presume", "I presume that the man had been escorted from the building safely."],
+["Disruptive", "Bringing a disruptive technological innovation in the market is never easy for a startup company in the present era of fierce competition in every field."],
+["Precipitate", "pologize for my staff – their actions were precipitate."],
+["Consensus", "There is a gradually growing consensus among the general public that the current regime has failed in delivering on its promises."],
+["Condemnation", "There has been a strong condemnation of the attack on civilians by the Army of the country in the name of ethnic cleansing."],
+["Denunciation","His family members reacted in support of denunciation of his methods of achieving success in life."]]
+list3.each do |word, example|
+  Example.create(word: word, example: example)
 end
