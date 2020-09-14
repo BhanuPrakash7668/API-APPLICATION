@@ -1,7 +1,7 @@
 
 
 class PublicController < ApplicationController
-before_action :authenticate,  except: [:homepage]
+#before_action :authenticate,  except: [:homepage]
   def homepage
     @apis = Api.all
   end
@@ -9,9 +9,19 @@ before_action :authenticate,  except: [:homepage]
   #  @definitions = Definition.all
   #  render json: @definitions.to_json
   #end
+  def random
+
+    @words =  Word.order("RANDOM()").first
+    render json: @words.to_json(:except => [:created_at, :updated_at, :id])
+    
+  end
+
   def defs
-    @definitions = Definition.all
-    render json: @definitions.to_json(:except => [:created_at, :updated_at, :token, :id])
+
+    @words = Word.find_by(word: params[:word])
+    @defs = Def.where(word_id: @words.id)
+    render json: @defs.to_json(:except => [:created_at, :updated_at, :id, :word_id])
+
   end
 
   def syns

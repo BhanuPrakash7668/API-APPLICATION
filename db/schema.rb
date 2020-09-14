@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_09_123714) do
+ActiveRecord::Schema.define(version: 2020_09_14_035416) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -39,12 +39,12 @@ ActiveRecord::Schema.define(version: 2020_09_09_123714) do
     t.index ["account_id"], name: "index_apis_on_account_id"
   end
 
-  create_table "definitions", force: :cascade do |t|
-    t.string "word"
+  create_table "defs", force: :cascade do |t|
     t.string "definition"
-    t.string "token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "word_id"
+    t.index ["word_id"], name: "index_defs_on_word_id"
   end
 
   create_table "examples", force: :cascade do |t|
@@ -61,4 +61,11 @@ ActiveRecord::Schema.define(version: 2020_09_09_123714) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "words", force: :cascade do |t|
+    t.string "word"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "defs", "words"
 end
