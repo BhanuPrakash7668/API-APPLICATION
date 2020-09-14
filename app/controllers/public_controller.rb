@@ -1,7 +1,7 @@
 
 
 class PublicController < ApplicationController
-#before_action :authenticate,  except: [:homepage]
+before_action :authenticate,  except: [:homepage]
   def homepage
     @apis = Api.all
   end
@@ -13,7 +13,7 @@ class PublicController < ApplicationController
 
     @words =  Word.order("RANDOM()").first
     render json: @words.to_json(:except => [:created_at, :updated_at, :id])
-    
+
   end
 
   def defs
@@ -25,18 +25,27 @@ class PublicController < ApplicationController
   end
 
   def syns
-    @sysnonyms=Synonym.all
-    render json: @sysnonyms.to_json(:except => [:created_at, :updated_at, :id])
+
+    @words = Word.find_by(word: params[:word])
+    @synonyms = Synonym.where(word_id: @words.id)
+    render json: @synonyms.to_json(:except => [:created_at, :updated_at, :id, :word_id])
+
   end
 
   def ants
-    @antonyms=Antonym.all
-    render json: @antonyms.to_json(:except => [:created_at, :updated_at, :id])
+
+    @words = Word.find_by(word: params[:word])
+    @antonyms = Antonym.where(word_id: @words.id)
+    render json: @antonyms.to_json(:except => [:created_at, :updated_at, :id, :word_id])
+
   end
 
   def exms
-      @examples = Example.all
-      render json: @examples.to_json(:except => [:created_at, :updated_at, :id])
+
+    @words = Word.find_by(word: params[:word])
+    @examples = Example.where(word_id: @words.id)
+    render json: @examples.to_json(:except => [:created_at, :updated_at, :id, :word_id])
+
   end
   #def cors_set_access_control_headers
   #      headers['Access-Control-Allow-Origin'] = '*'
@@ -53,6 +62,8 @@ class PublicController < ApplicationController
         Api.find_by(value: token)
       end
     end
+
+
   ##def authenticate
     #api_key = request.headers['X-Api-Key']
     #@ap = Api.find_by(value: api_key) if api_key

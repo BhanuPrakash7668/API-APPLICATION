@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_14_035416) do
+ActiveRecord::Schema.define(version: 2020_09_14_104435) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -25,10 +25,11 @@ ActiveRecord::Schema.define(version: 2020_09_14_035416) do
   end
 
   create_table "antonyms", force: :cascade do |t|
-    t.string "word"
     t.string "antonym"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "word_id"
+    t.index ["word_id"], name: "index_antonyms_on_word_id"
   end
 
   create_table "apis", force: :cascade do |t|
@@ -48,17 +49,19 @@ ActiveRecord::Schema.define(version: 2020_09_14_035416) do
   end
 
   create_table "examples", force: :cascade do |t|
-    t.string "word"
     t.string "example"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "word_id"
+    t.index ["word_id"], name: "index_examples_on_word_id"
   end
 
   create_table "synonyms", force: :cascade do |t|
-    t.string "word"
     t.string "synonym"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "word_id"
+    t.index ["word_id"], name: "index_synonyms_on_word_id"
   end
 
   create_table "words", force: :cascade do |t|
@@ -67,5 +70,8 @@ ActiveRecord::Schema.define(version: 2020_09_14_035416) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "antonyms", "words"
   add_foreign_key "defs", "words"
+  add_foreign_key "examples", "words"
+  add_foreign_key "synonyms", "words"
 end
