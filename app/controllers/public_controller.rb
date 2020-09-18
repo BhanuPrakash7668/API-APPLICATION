@@ -1,75 +1,48 @@
-
-
+# class PublicController represents words api
 class PublicController < ApplicationController
-before_action :authenticate,  except: [:homepage]
+  before_action :authenticate, except: [:homepage]
+  before_action :get_word, except: [:homepage, :random]
   def homepage
     @apis = Api.all
   end
-  #def defs
-  #  @definitions = Definition.all
-  #  render json: @definitions.to_json
-  #end
+
+  # Select a random word from available words.
   def random
-
-    @words =  Word.order("RANDOM()").first
-    render json: @words.to_json(:except => [:created_at, :updated_at, :id])
-
+    @word =  Word.order("RANDOM()").first # Get Random Word
+    render json: @word.to_json(except: [:created_at, :updated_at, :id]) # Display the word in json format
   end
 
+  # Select word passed in the URL.
+  def get_word
+    @word = Word.find_by(word: params[:word]) # Get word passed in the URL
+  end
+
+  # Select definitions of that particular word we got from the URL.
   def defs
-
-    @words = Word.find_by(word: params[:word])
-    @defs = Def.where(word_id: @words.id)
-    render json: @defs.to_json(:except => [:created_at, :updated_at, :id, :word_id])
-
+    render json: @word.defs.to_json(except: [:created_at, :updated_at, :id, :word_id]) # Display definition of the word in JSON
   end
 
+  # Select synonys of that particular word we got from the URL.
   def syns
-
-    @words = Word.find_by(word: params[:word])
-    @synonyms = Synonym.where(word_id: @words.id)
-    render json: @synonyms.to_json(:except => [:created_at, :updated_at, :id, :word_id])
-
+    render json: @word.synonyms.to_json(except: [:created_at, :updated_at, :id, :word_id]) # Display synonyms of the word in JSON
   end
 
+  # Select anotnyms of that particular word we got from the URL.
   def ants
-
-    @words = Word.find_by(word: params[:word])
-    @antonyms = Antonym.where(word_id: @words.id)
-    render json: @antonyms.to_json(:except => [:created_at, :updated_at, :id, :word_id])
-
+    render json: @word.antonyms.to_json(except: [:created_at, :updated_at, :id, :word_id]) # Display antonyms of the word in JSON
   end
 
+  # Select examples of that particular word we got from the URL.
   def exms
-
-    @words = Word.find_by(word: params[:word])
-    @examples = Example.where(word_id: @words.id)
-    render json: @examples.to_json(:except => [:created_at, :updated_at, :id, :word_id])
-
+    render json: @word.examples.to_json(except: [:created_at, :updated_at, :id, :word_id]) # Display examples of the word in JSON.
   end
-  #def cors_set_access_control_headers
-  #      headers['Access-Control-Allow-Origin'] = '*'
-  #      headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, PATCH, OPTIONS'
-  #      headers['Access-Control-Request-Method'] = '*'
-  #      headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-  #end
-#response.set_header('Authorization', 'Token 3nl7QISLkQrZgzjTp1vBOwtt')
 
   private
+
+    # Authentication of the API key.
     def authenticate
       authenticate_or_request_with_http_token do |token, options|
-
         Api.find_by(value: token)
       end
     end
-
-
-  ##def authenticate
-    #api_key = request.headers['X-Api-Key']
-    #@ap = Api.find_by(value: api_key) if api_key
-    #unless @ap
-    #  head(:unauthorized)
-    #  return false
-
-    #end
 end

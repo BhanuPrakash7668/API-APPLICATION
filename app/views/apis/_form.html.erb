@@ -14,7 +14,7 @@
   <div class="field">
     <%  @token = SecureRandom.base64.tr('+/=', 'Qrt') %>
     <%= form.label :value %>
-    <%= form.text_field :value, :value => @token  %>
+    <%= form.text_field :value, value: @token  %>
   </div>
 
   <div class="actions">
